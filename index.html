@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Run For Ăn</title>
+<meta name="description" content="Bảng xếp hạng chạy bộ của nhóm Run For Ăn">
+<meta name="theme-color" content="#0F5A4C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Run For Ăn">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Be+Vietnam+Pro:wght@400;500;600&display=swap">
+<style>
+/* Trang khởi động Run For Ăn · v1.00 — hiện icon, hướng dẫn thêm vào màn hình chính, mở app Google Apps Script */
+:root{--bg1:#0F5A4C;--bg2:#14211E;--ink:#ECEAE4;--ink2:#A9BDB6;--gold:#EFB54A;--gold-ink:#2A2210;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.14)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:linear-gradient(180deg,var(--bg1),var(--bg2) 70%) fixed;background-color:var(--bg2);color:var(--ink);font:15px/1.5 "Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  padding:calc(28px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.w{max-width:440px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.logo{width:124px;height:124px;border-radius:28px;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+h1{margin:6px 0 0;font:700 40px/1 "Barlow Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase}
+h1 span{color:var(--gold)}
+.sub{margin:0;color:var(--ink2)}
+.go{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border-radius:16px;background:var(--gold);color:var(--gold-ink);font-weight:600;font-size:17px;text-decoration:none;margin-top:6px}
+.go:active{transform:scale(.98)}
+.card{width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px}
+.card h2{margin:0 0 8px;font-size:16px}
+.card ol{margin:0;padding-left:22px}
+.card li{margin:4px 0}
+.card b{color:var(--gold)}
+.note{font-size:13px;color:var(--ink2)}
+.warn{background:rgba(239,181,74,.16);border-color:rgba(239,181,74,.5)}
+.spin{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--gold);animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+</style>
+</head>
+<body>
+<main class="w">
+  <img class="logo" src="icon-512.png" alt="Biểu tượng Run For Ăn">
+  <h1>Run For <span>Ăn</span></h1>
+  <p class="sub">Bảng xếp hạng chạy bộ của nhóm</p>
+
+  <!-- Khi mở từ icon trên màn hình chính: tự chuyển vào app -->
+  <section id="opening" hidden>
+    <div class="spin" aria-hidden="true"></div>
+    <p class="sub">Đang mở app…</p>
+  </section>
+
+  <a class="go" id="goBtn" href="#">🏃 Mở app</a>
+
+  <section class="card" id="ios" hidden>
+    <h2>📱 Thêm vào màn hình chính (iPhone)</h2>
+    <ol>
+      <li>Mở trang này bằng <b>Safari</b></li>
+      <li>Chạm nút <b>Chia sẻ</b> (ô vuông có mũi tên lên)</li>
+      <li>Chọn <b>Thêm vào MH chính</b> → <b>Thêm</b></li>
+    </ol>
+  </section>
+
+  <section class="card" id="android" hidden>
+    <h2>🤖 Thêm vào màn hình chính (Android)</h2>
+    <ol>
+      <li>Mở trang này bằng <b>Chrome</b></li>
+      <li>Chạm <b>⋮</b> ở góc trên bên phải</li>
+      <li>Chọn <b>Thêm vào màn hình chính</b> (hoặc <b>Cài đặt ứng dụng</b>) → <b>Thêm</b></li>
+    </ol>
+  </section>
+
+  <section class="card warn" id="noLink" hidden>
+    <h2>⚠️ Chưa có link app</h2>
+    <p class="note">Mở file <b>index.html</b> trên GitHub, dán link <b>/exec</b> của Google Apps Script vào dòng <b>APP_URL</b> rồi lưu lại.</p>
+  </section>
+
+  <p class="note">Mở bằng icon trên màn hình chính, app sẽ tự vào thẳng bảng xếp hạng.</p>
+</main>
+
+<script>
+/* ⬇⬇ DÁN LINK APP (đuôi /exec) VÀO GIỮA HAI DẤU NHÁY Ở DÒNG DƯỚI ⬇⬇ */
+var APP_URL = 'https://script.google.com/macros/s/AKfycbyRcwfOqD8TxSRKe0qLV-foqDtetrpzwfBXmratf819zvk9gyIGWORKBXOp5qGQL7LKTQ/exec';
+/* ⬆⬆ chỉ sửa đúng dòng trên ⬆⬆ */
+
+(function () {
+  var ok = /^https:\/\/script\.google\.com\/.+\/exec$/.test(APP_URL.trim());
+  var standalone = window.navigator.standalone === true ||
+    (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  var fromIcon = standalone || /[?&]app=1\b/.test(location.search);
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && 'ontouchend' in document);
+  var isAndroid = /Android/.test(ua);
+  var btn = document.getElementById('goBtn');
+
+  if (!ok) { document.getElementById('noLink').hidden = false; btn.hidden = true; return; }
+  btn.href = APP_URL;
+
+  if (fromIcon) {
+    document.getElementById('opening').hidden = false;
+    btn.textContent = '🏃 Mở app (nếu chưa tự mở)';
+    setTimeout(function () { location.replace(APP_URL); }, 250);
+    return;
+  }
+  if (isIOS) document.getElementById('ios').hidden = false;
+  else if (isAndroid) document.getElementById('android').hidden = false;
+  else { document.getElementById('ios').hidden = false; document.getElementById('android').hidden = false; }
+})();
+</script>
+</body>
+</html>
