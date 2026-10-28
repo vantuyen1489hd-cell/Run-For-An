@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<!-- Run For Ăn v1.51 · bản chạy trên GitHub Pages. Dữ liệu vẫn nằm trong Google Sheet (gọi qua API_URL bên dưới). -->
+<!-- Run For Ăn v1.52 · bản chạy trên GitHub Pages. Dữ liệu vẫn nằm trong Google Sheet (gọi qua API_URL bên dưới). -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Bảng xếp hạng chạy bộ của nhóm Run For Ăn">
 <meta name="theme-color" content="#262624">
@@ -165,13 +165,18 @@ input,select{font:inherit;color:var(--ink)}
 .bar2 .trk{position:absolute;left:0;right:0;top:22px;height:6px;border-radius:3px;background:var(--bo-pill)}
 .bar2 .fil{position:absolute;left:0;top:22px;height:6px;border-radius:3px}
 .bar2 .fil{background:var(--bo-bar)}
+/* v1.52 · Đạt target: đường chạy chuyển xanh lá (giữ xanh cả khi vượt thưởng); skin tối dùng xanh tươi có quầng sáng, skin sáng dùng xanh đậm */
+:root{--run-won:#1E9E55;--run-glow:none}
+:root[data-skin="nguyenban"],:root[data-skin="dem"],:root[data-skin="auto"][data-theme="dark"]{--run-won:#46D483;--run-glow:0 0 8px -1px rgba(70,212,131,.55)}
+@media (prefers-color-scheme:dark){:root[data-skin="auto"]:not([data-theme="light"]){--run-won:#46D483;--run-glow:0 0 8px -1px rgba(70,212,131,.55)}}
+.bar2 .fil.won{background:var(--run-won);box-shadow:var(--run-glow)}
 .bar2 .flag{position:absolute;top:0;width:24px;height:27px;margin-left:-2px}
 .bar2 .flag.off{opacity:.9}
 .bar2 .run{position:absolute;top:3px;font-size:21px;line-height:1;transform:translateX(-62%)}
 .bar2 .run span{display:inline-block;transform:scaleX(-1)}
 .bar2 .cup{position:absolute;left:100%;top:4px;font-size:21px;line-height:1;transform:translateX(-50%)}
 .bar2 .cup.off{filter:grayscale(1);opacity:.45}
-.bar2 .cup.on{top:0;font-size:26px;filter:drop-shadow(0 0 6px rgba(239,181,74,.55))}
+.bar2 .cup.on{top:0;font-size:26px;filter:drop-shadow(0 0 7px rgba(239,181,74,.8))}
 .pod.p1 .blk{box-shadow:inset 0 0 0 2px var(--m1),0 0 16px -2px var(--m1)}
 .pod.p2 .blk{box-shadow:inset 0 0 0 2px var(--m2),0 0 16px -2px var(--m2)}
 .pod.p3 .blk{box-shadow:inset 0 0 0 2px var(--m3),0 0 16px -2px var(--m3)}
@@ -335,7 +340,7 @@ h3.sec{font-size:15px;margin:4px 0 8px}
 
 <script>
 /* ───────── Tiện ích ───────── */
-var APP_VERSION='1.51';
+var APP_VERSION='1.52';
 /* Khi app được nhúng trong trang Run For Ăn (GitHub): báo màu nền để tô vùng tai thỏ / thanh vuốt cho khớp */
 function notifyShell(ready){try{if(window.top===window){var m=document.querySelector('meta[name=theme-color]');if(m)m.content=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||m.content;return}var cs=getComputedStyle(document.documentElement);window.top.postMessage({rfa:1,ready:!!ready,bg:cs.getPropertyValue('--bg').trim(),nav:cs.getPropertyValue('--card').trim()},'*')}catch(e){}}
 var QD_MAC_DINH=['Pace tối thiểu 3:00 – 12:00 phút/km','Chạy bộ, giữ tốc độ ổn định'];  // chỉ dùng cho bản xem thử; bản thật sửa trong Cài đặt → ✏️ Đợt
@@ -588,7 +593,7 @@ function stOf(r){return r.sao?'bonus':r.dat?'ok':'wip'}
 var PILL={wip:'Đang chạy',ok:'Đạt',bonus:'Thưởng'};
 function flagSvg(on){return '<svg class="flag'+(on?'':' off')+'" viewBox="0 0 22 25" aria-hidden="true"><rect x="1" y="1" width="2.2" height="23" rx="1" fill="'+(on?'#E9E6DE':'#B9B6AE')+'"/><circle cx="2.1" cy="1.6" r="1.6" fill="'+(on?'#EFB54A':'#B9B6AE')+'"/><path d="M3.2 2.5C7 0.6 10.5 4.6 14.5 2.6C16.5 1.6 18.6 1.7 20.6 2.6V12.4C18.6 11.5 16.5 11.4 14.5 12.4C10.5 14.4 7 10.4 3.2 12.3Z" fill="url(#'+(on?'ckOn':'ckOff')+')" stroke="'+(on?'#0E7A62':'#55534E')+'" stroke-width=".8"/></svg>'}
 function bar2(r){var hasT=r.targetThuong>r.targetDat,den=hasT?r.targetThuong:(r.targetDat||1),w=Math.min(r.km/den,1)*100,fl=hasT?r.targetDat/den*100:100;
-  return '<span class="bar2" aria-hidden="true"><i class="trk"></i><i class="fil" style="width:'+w.toFixed(1)+'%"></i>'+(hasT?'<span style="position:absolute;left:'+fl.toFixed(1)+'%;top:0">'+flagSvg(r.dat)+'</span>':'')+
+  return '<span class="bar2" aria-hidden="true"><i class="trk"></i><i class="fil'+(r.dat||r.sao?' won':'')+'" style="width:'+w.toFixed(1)+'%"></i>'+(hasT?'<span style="position:absolute;left:'+fl.toFixed(1)+'%;top:0">'+flagSvg(r.dat)+'</span>':'')+
     (r.sao?'':'<span class="run" style="left:'+w.toFixed(1)+'%"><span>🏃</span></span>')+(hasT?'<span class="cup '+(r.sao?'on':'off')+'">🏆</span>':'<span style="position:absolute;left:100%;top:0">'+flagSvg(r.dat)+'</span>')+'</span>'}
 
 function dongHo(dot,t){
@@ -1054,7 +1059,7 @@ function makeShareImage(mode){
       var bw=rx-nx-230,bt=y+56;
       x.fillStyle='rgba(239,181,74,.22)';rr(x,nx,bt,bw,9,4.5);x.fill();
       var den=week?mx:Math.max(r.targetThuong,r.targetDat)||1,fw=Math.max(0,Math.min(1,v/den))*bw;
-      if(fw>0){x.fillStyle='#EFB54A';rr(x,nx,bt,Math.max(fw,9),9,4.5);x.fill()}
+      if(fw>0){x.fillStyle=(r.dat||r.sao)&&!week?'#46D483':'#EFB54A';rr(x,nx,bt,Math.max(fw,9),9,4.5);x.fill()}
       if(!week&&r.targetThuong>r.targetDat){var fx=nx+bw*r.targetDat/r.targetThuong;x.fillStyle='#F4F1E8';x.fillRect(fx-1.5,bt-7,3,23)}
       x.textAlign='right';x.fillStyle=ST[st][1];x.font='700 46px "Barlow Condensed",sans-serif';x.fillText(fmt(v),rx,y+44);
       x.font='400 22px "Be Vietnam Pro",sans-serif';x.fillStyle='#A8A59C';x.fillText(week?'km / 7 ngày':'km · '+pctF(r.pct),rx,y+72);x.textAlign='left';
