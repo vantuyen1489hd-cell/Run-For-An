@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<!-- Run For Ăn v1.61 · bản chạy trên GitHub Pages. Dữ liệu vẫn nằm trong Google Sheet (gọi qua API_URL bên dưới). -->
+<!-- Run For Ăn v1.62 · bản chạy trên GitHub Pages. Dữ liệu vẫn nằm trong Google Sheet (gọi qua API_URL bên dưới). -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Bảng xếp hạng chạy bộ của nhóm Run For Ăn">
 <meta name="theme-color" content="#262624">
@@ -322,6 +322,33 @@ h3.sec{font-size:15px;margin:4px 0 8px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (max-width:380px){.clock-n{font-size:48px;min-width:52px}.pod .pn{font-size:12px}}
 
+/* ═════ v1.62 · Xem lại cuộc đua ═════ */
+.lgbtns{display:flex;gap:6px;flex-wrap:wrap}
+.rc-top{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:2px 0 10px}
+.rc-day{font:700 34px/1 var(--f-num)}.rc-day small{display:block;font:500 13px/1.4 var(--f-body);color:var(--ink2);margin-top:2px}
+.rc-tot{text-align:right;font-size:12.5px;color:var(--ink2)}.rc-tot b{display:block;font:700 22px/1.1 var(--f-num);color:var(--ink)}
+.rc-stage{position:relative;margin:0 0 10px;overflow:hidden}
+.rc-row{position:absolute;left:0;right:0;top:0;height:28px;display:flex;align-items:center;gap:6px;transition:transform .5s cubic-bezier(.3,.9,.3,1);will-change:transform}
+.rc-rk{flex:none;width:20px;text-align:right;font:700 15px var(--f-num);color:var(--ink2)}
+.rc-row.r1 .rc-rk{color:var(--m1,#EFB54A)}.rc-row.r2 .rc-rk{color:var(--m2,#C9D1DA)}.rc-row.r3 .rc-rk{color:var(--m3,#D9925B)}
+.rc-nm{flex:none;width:76px;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-bw{flex:1;position:relative;height:14px;min-width:0}
+.rc-bw .tk{position:absolute;inset:4px 0;border-radius:4px;background:var(--track,rgba(127,127,127,.18))}
+.rc-bar{position:absolute;left:0;top:2px;bottom:2px;border-radius:6px;background:var(--bo-bar,#EFB54A);min-width:4px}
+.rc-bar.won{background:var(--run-won,#1E9E55);box-shadow:var(--run-glow,none)}
+.rc-ic{position:absolute;top:50%;transform:translate(-55%,-62%);height:24px;width:auto;pointer-events:none}
+.rc-ic.ch{height:30px;transform:translate(-50%,-70%)}
+.rc-km{flex:none;width:44px;text-align:right;font:700 14px var(--f-num)}
+.rc-ev{min-height:58px;display:flex;flex-direction:column;gap:3px;font-size:12.5px;margin-bottom:10px}
+.rc-ev:empty:before{content:'Diễn biến nổi bật (đạt target, lên dẫn đầu…) sẽ hiện ở đây';font-size:12px;color:var(--ink2);padding:5px 2px}
+.rc-ev div{padding:5px 10px;border-radius:10px;background:var(--inset);animation:rcin .35s ease-out}.rc-ev div b{font-weight:600}
+@keyframes rcin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.rc-ctl{display:flex;align-items:center;gap:8px}
+.rc-ctl .rc-pp{flex:none;width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:18px}
+.rc-ctl input{flex:1;accent-color:var(--accent)}
+.rc-sp{flex:none;padding:7px 9px;border-radius:10px;background:var(--inset);font:700 13px var(--f-num);min-width:40px}
+:root[data-skin^="kinh"] .rc-ctl .rc-pp{background:rgba(255,255,255,.92)}
+
 /* ═════ v1.60 · Sinh nhật ═════ */
 .bdbar{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:12px 14px;border-radius:16px;margin-bottom:12px;color:var(--ink);
  background:linear-gradient(120deg,rgba(255,150,190,.22),rgba(239,181,74,.22));box-shadow:inset 0 0 0 1px rgba(255,190,140,.55),0 6px 20px rgba(255,150,120,.15)}
@@ -348,8 +375,14 @@ h3.sec{font-size:15px;margin:4px 0 8px}
  --m1:#F6C65B;--m2:#D9E1EA;--m3:#E7A06A;--pod1:rgba(246,198,91,.18);--pod2:rgba(255,255,255,.09);--pod3:rgba(255,255,255,.09);--pod-ink:#F4F7FC;
  --run-won:#46D483;--run-glow:0 0 8px -1px rgba(70,212,131,.6);--sbar:transparent;
  --gl-blur:blur(22px) saturate(185%);--gl-hi:inset 0 1px 0 rgba(255,255,255,.34),inset 0 0 0 1px rgba(255,255,255,.10),inset 0 -1px 0 rgba(255,255,255,.05);--gl-sh:0 10px 28px rgba(0,0,0,.28)}
-:root[data-skin="kinhngoc"]{--g0:#04141A;--g1:#0C7F7C;--g2:#2D63C8;--g3:#169B5E;--accent:#7FE3C9;--bar:rgba(6,30,36,.66);--bar2:rgba(8,34,40,.86)}
-:root[data-skin="kinhthan"]{--g0:#0E0F12;--g1:#3A3F4A;--g2:#2B3550;--g3:#3C3A36;--accent:#C9D6EA;--bar:rgba(22,23,27,.70);--bar2:rgba(26,27,32,.88)}
+/* v1.62 · Kính sáng: nền màu tươi, kính nhuộm nhẹ màu nền, viền phản chiếu mạnh, nút chính trắng (màu nền còn được JS pha theo 2 thanh chỉnh) */
+:root[data-skin="kinhngoc"]{--g0:#0F8F8C;--g1:#45D6B5;--g2:#2FA8E0;--g3:#7BE0A0;--on-accent:#0B5E5A;--ink2:rgba(236,255,250,.86)}
+:root[data-skin="kinhcucquang"]{--g0:#1C6E86;--g1:#3FD9A0;--g2:#8A6CF0;--g3:#3FA9F5;--on-accent:#0F5A6E;--ink2:rgba(236,252,255,.86)}
+:root[data-skin="kinhbien"]{--g0:#1552AE;--g1:#2FB0E2;--g2:#3D76EC;--g3:#47CFE0;--on-accent:#124A9E;--ink2:rgba(236,247,255,.86)}
+:root[data-skin="kinhthan"]{--g0:#4A505C;--g1:#8C96A8;--g2:#5E6B85;--g3:#A39C90;--on-accent:#2E3440;--ink2:rgba(240,243,248,.86)}
+:root[data-skin^="kinh"]{--accent:#FFFFFF;--inset:rgba(255,255,255,.18);--bg:rgba(255,255,255,.10);--wip-bg:rgba(10,30,90,.24);--ok-bg:rgba(0,85,60,.30);--bo-bg:rgba(160,100,0,.32);
+ --gl-blur:blur(26px) saturate(190%) brightness(1.08);
+ --gl-hi:inset 0 1px 0 rgba(255,255,255,.55),inset 1px 0 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.08);--gl-sh:0 8px 24px rgba(0,30,60,.18)}
 :root[data-skin^="kinh"],:root[data-skin^="kinh"] body{background:var(--g0)}
 /* Nền loang màu cố định phía sau mọi thứ */
 :root[data-skin^="kinh"] #gbg{display:block;position:fixed;left:0;right:0;top:0;height:var(--appH);z-index:-1;pointer-events:none;overflow:hidden;background:
@@ -368,7 +401,8 @@ h3.sec{font-size:15px;margin:4px 0 8px}
 :root[data-skin^="kinh"] .pod.p3 .blk{background:linear-gradient(180deg,rgba(231,160,106,.30),rgba(231,160,106,.08));box-shadow:inset 0 0 0 2px var(--m3),0 0 16px -2px var(--m3),inset 0 1px 0 rgba(255,255,255,.45)}
 :root[data-skin^="kinh"] .top:before,:root[data-skin^="kinh"] :is(.nav,.fab,.sheet,.cel-card){-webkit-backdrop-filter:var(--gl-blur);backdrop-filter:var(--gl-blur)}
 :root[data-skin^="kinh"] .card{position:relative;border:0}
-:root[data-skin^="kinh"] .card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(140deg,rgba(255,255,255,.16),rgba(255,255,255,0) 38%,rgba(255,255,255,0) 70%,rgba(255,255,255,.06))}
+:root[data-skin^="kinh"] .card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.30),rgba(255,255,255,.04) 30%,rgba(255,255,255,0) 65%,rgba(255,255,255,.10))}
+:root[data-skin^="kinh"] .fab{color:var(--ink)!important}
 :root[data-skin^="kinh"] .card.bonus{box-shadow:var(--gl-hi),inset 0 0 0 1.5px var(--bo-line),0 10px 30px rgba(246,198,91,.18)}
 :root[data-skin^="kinh"] .clock{background:rgba(255,255,255,.10);color:var(--ink);border:0}
 :root[data-skin^="kinh"] .clock-n{color:var(--accent)}:root[data-skin^="kinh"] :is(.clock-u,.clock-s,.stats){color:var(--ink2);opacity:1}:root[data-skin^="kinh"] .stats b{color:var(--ink)}
@@ -385,21 +419,20 @@ h3.sec{font-size:15px;margin:4px 0 8px}
  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.08));box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.12),0 4px 14px rgba(0,0,0,.25)}
 :root[data-skin^="kinh"] .nav button{position:relative;z-index:1}
 :root[data-skin^="kinh"] .fab{background:var(--bar2);color:var(--accent);border:0;box-shadow:var(--gl-hi),0 10px 24px rgba(0,0,0,.35);top:calc(var(--appH) - 92px - env(safe-area-inset-bottom,0px))}
-:root[data-skin^="kinh"] :is(.btn.primary,.chips button.on){background:var(--accent);color:var(--on-accent);border:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 6px 16px rgba(0,0,0,.25)}
+:root[data-skin^="kinh"] :is(.btn.primary,.chips button.on){background:rgba(255,255,255,.92);color:var(--on-accent);border:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 6px 16px rgba(0,0,0,.25)}
 :root[data-skin^="kinh"] :is(.sheet,.cel-card){background:var(--bar2)}
 :root[data-skin^="kinh"] .pad button{background:rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
 :root[data-skin^="kinh"] .rule{background:rgba(246,198,91,.16);color:var(--bo-ink);box-shadow:inset 0 0 0 1px rgba(246,198,91,.45)}
 :root[data-skin^="kinh"] .pod.p1 .blk{color:var(--m1)}:root[data-skin^="kinh"] .pod.p2 .blk{color:var(--m2)}:root[data-skin^="kinh"] .pod.p3 .blk{color:var(--m3)}
-/* v1.61 · Chuyển cảnh giữa các tab: nội dung trượt nhẹ theo hướng tab + mờ dần vào */
-#main.tab-r{animation:tabR .32s cubic-bezier(.22,1,.36,1)}#main.tab-l{animation:tabL .32s cubic-bezier(.22,1,.36,1)}
-@keyframes tabR{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
-@keyframes tabL{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){#main.tab-r,#main.tab-l{animation:none}}
+/* v1.62 · Chuyển tab: nội dung mới phóng to từ đúng vị trí nút vừa bấm (JS đặt transform-origin), hơi nảy ở cuối */
+#main.zin{animation:zin .42s cubic-bezier(.2,.9,.25,1.12) both}
+@keyframes zin{from{opacity:0;transform:scale(.16);filter:blur(6px)}55%{opacity:1;filter:blur(0)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#main.zin{animation:none}}
 /* v1.61 · Độ trong suốt kính: JS đặt --gl-card/--gl-bar… theo thanh trượt trong Cài đặt → Giao diện */
 :root[data-skin^="kinh"] .clock{background:var(--gl-clk,rgba(255,255,255,.10))}
 :root[data-skin^="kinh"] .nav{background:var(--gl-bar,var(--bar))}
 :root[data-skin^="kinh"] .top:before,:root[data-skin^="kinh"] :is(.sheet,.cel-card),:root[data-skin^="kinh"] .fab{background:var(--gl-bar2,var(--bar2))}
-.glrow{display:flex;align-items:center;gap:10px;margin:12px 0 2px;font-size:14px}.glrow input{flex:1;accent-color:var(--accent)}.glrow b{min-width:42px;text-align:right;font-variant-numeric:tabular-nums}
+.glrow{display:flex;align-items:center;gap:10px;margin:12px 0 2px;font-size:13.5px}.glrow span{flex:none;white-space:nowrap}.glrow input{flex:1;accent-color:var(--accent)}.glrow b{min-width:42px;text-align:right;font-variant-numeric:tabular-nums}
 /* ── Chuyển động (bật/tắt trong Cài đặt → Hiệu ứng) ── */
 html.gfx #gbg:before{animation:gdrift1 26s ease-in-out infinite alternate}
 html.gfx #gbg:after{animation:gdrift2 34s ease-in-out infinite alternate}
@@ -415,7 +448,7 @@ html.gfx[data-skin^="kinh"] :is(.card,.btn,.chip,.icon-btn,.fab):active{transfor
 html.gfx[data-skin^="kinh"] .nav button:active{transform:scale(.9)}
 @media (prefers-reduced-motion:reduce){html.gfx #gbg:before,html.gfx #gbg:after,html.gfx .card.bonus:after,html.gfx .starbar:after{animation:none}}
 </style>
-<script>try{var k0=localStorage.getItem("xhcb_skin");if(["nguyenban","daiduong","kinhngoc","kinhthan"].indexOf(k0)<0)k0="nguyenban";document.documentElement.setAttribute("data-skin",k0)}catch(e){document.documentElement.setAttribute("data-skin","nguyenban")}</script>
+<script>try{var k0=localStorage.getItem("xhcb_skin");if(["nguyenban","daiduong","kinhngoc","kinhcucquang","kinhbien","kinhthan"].indexOf(k0)<0)k0="nguyenban";document.documentElement.setAttribute("data-skin",k0)}catch(e){document.documentElement.setAttribute("data-skin","nguyenban")}</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="ckOn" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F4F1E8"/><rect width="4" height="4" fill="#1FA987"/><rect x="4" y="4" width="4" height="4" fill="#1FA987"/></pattern><pattern id="ckOff" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F4F1E8"/><rect width="4" height="4" fill="#2B2B29"/><rect x="4" y="4" width="4" height="4" fill="#2B2B29"/></pattern></defs></svg>
 <div id="gbg" aria-hidden="true"></div>
@@ -455,7 +488,7 @@ var RFA_IMG={rm:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEMAAABOCAMAAABMi
 
 <script>
 /* ───────── Tiện ích ───────── */
-var APP_VERSION='1.61';
+var APP_VERSION='1.62';
 /* Khi app được nhúng trong trang Run For Ăn (GitHub): báo màu nền để tô vùng tai thỏ / thanh vuốt cho khớp */
 function notifyShell(ready){try{if(window.top===window){var m=document.querySelector('meta[name=theme-color]'),cs0=getComputedStyle(document.documentElement);if(m)m.content=(cs0.getPropertyValue('--g0')||cs0.getPropertyValue('--bg')).trim()||m.content;return}var cs=getComputedStyle(document.documentElement);window.top.postMessage({rfa:1,ready:!!ready,bg:cs.getPropertyValue('--bg').trim(),nav:cs.getPropertyValue('--card').trim()},'*')}catch(e){}}
 var QD_MAC_DINH=['Pace tối thiểu 3:00 – 12:00 phút/km','Chạy bộ, giữ tốc độ ổn định'];  // chỉ dùng cho bản xem thử; bản thật sửa trong Cài đặt → ✏️ Đợt
@@ -642,8 +675,10 @@ function chuoiHienTai(m,today){var d=m[today]>0?today:addDays(today,-1),n=0;whil
 /* ───────── Giao diện (mỗi máy tự chọn) ───────── */
 var SKINS=[{id:'nguyenban',l:'🖤 Nguyên bản tối',c:['#85B7EB','#2A4517','#4A3712','#262624']},
   {id:'daiduong',l:'🌊 Đại dương',c:['#08788A','#C4EBCF','#FAE09A','#DCEEF0']},
-  {id:'kinhngoc',l:'🌿 Kính Ngọc',c:['#7FE3C9','#0C7F7C','#2D63C8','#04141A']},
-  {id:'kinhthan',l:'🖤 Kính Than Chì',c:['#C9D6EA','#3A3F4A','#2B3550','#0E0F12']}];
+  {id:'kinhngoc',l:'🌿 Kính Ngọc',c:['#45D6B5','#2FA8E0','#7BE0A0','#0F8F8C']},
+  {id:'kinhcucquang',l:'🌌 Kính Cực Quang',c:['#3FD9A0','#8A6CF0','#3FA9F5','#1C6E86']},
+  {id:'kinhbien',l:'🐋 Kính Biển Sâu',c:['#2FB0E2','#3D76EC','#47CFE0','#1552AE']},
+  {id:'kinhthan',l:'🩶 Kính Than Chì',c:['#8C96A8','#5E6B85','#A39C90','#4A505C']}];
 S.skin=store('skin')||'nguyenban';if(!SKINS.some(function(k){return k.id===S.skin}))S.skin='nguyenban'; // v1.60: giao diện đã bỏ → về Nguyên bản tối
 var SKIN_NOTE='<p class="note" style="margin:0 0 10px">Chỉ đổi màu trên máy của bạn, không ảnh hưởng người khác. Hai bộ “Kính” có hiệu ứng kính lỏng như iPhone, bật/tắt chuyển động trong mục Hiệu ứng.</p>';
 function setSkin(id){S.skin=id;store('skin',id);document.documentElement.setAttribute('data-skin',id);applyGlass();applyGfx();notifyShell()}
@@ -651,16 +686,32 @@ function setSkin(id){S.skin=id;store('skin',id);document.documentElement.setAttr
 function gfxOn(){return store('gfx')!=='off'}
 function tabFxOn(){return store('tabFx')!=='off'}
 /* v1.61 · Độ trong suốt kính: 0 = đặc nhất, 100 = trong nhất, mặc định 50 */
-var GL_BAR={kinhngoc:['6,30,36','8,34,40'],kinhthan:['22,23,27','26,27,32']};
-function glA(){var v=parseInt(store('glA'),10);return isNaN(v)?50:Math.max(0,Math.min(100,v))}
-function applyGlass(){var st=document.documentElement.style,names=['--card','--inset','--bg','--wip-bg','--ok-bg','--bo-bg','--gl-clk','--gl-bar','--gl-bar2'];
-  if(!isGlass()){names.forEach(function(n){st.removeProperty(n)});return}
-  var f=1.6-1.2*glA()/100,a=function(x){return Math.max(.02,Math.min(.6,x*f)).toFixed(3)},b=GL_BAR[S.skin]||GL_BAR.kinhngoc,ba=function(x){return Math.max(.38,Math.min(.97,x+(f-1)*.32)).toFixed(3)};
-  st.setProperty('--card','rgba(255,255,255,'+a(.09)+')');st.setProperty('--inset','rgba(255,255,255,'+a(.11)+')');st.setProperty('--bg','rgba(255,255,255,'+a(.05)+')');
-  st.setProperty('--wip-bg','rgba(130,175,255,'+a(.13)+')');st.setProperty('--ok-bg','rgba(70,212,150,'+a(.16)+')');st.setProperty('--bo-bg','rgba(246,198,91,'+a(.18)+')');
-  st.setProperty('--gl-clk','rgba(255,255,255,'+a(.10)+')');st.setProperty('--gl-bar','rgba('+b[0]+','+ba(.66)+')');st.setProperty('--gl-bar2','rgba('+b[1]+','+ba(.86)+')')}
-function glSlider(){return isGlass()?'<label class="glrow" for="glA"><span>🔍 Độ trong suốt kính</span><input type="range" id="glA" min="0" max="100" step="5" value="'+glA()+'"><b id="glAv">'+glA()+'%</b></label><p class="note" style="margin:0">Kéo sang phải: kính trong hơn, thấy nền rõ hơn. Kéo sang trái: kính đặc hơn, chữ nổi hơn.</p>':
-  '<p class="note" style="margin:10px 0 0">🔍 Độ trong suốt kính: chọn Kính Ngọc hoặc Kính Than Chì để chỉnh.</p>'}
+/* v1.62 · Kính sáng: bảng màu gốc + 3 thanh chỉnh (mỗi máy nhớ riêng)
+   glA  = độ trong suốt kính (0 đặc → 100 trong, mặc định 50)
+   glS  = độ đậm màu nền (0 xám trung tính → 100 rực, mặc định 40)
+   glL  = độ sáng tối nền (0 tối → 100 sáng, mặc định 50 = giữ nguyên) */
+var GLASS={kinhngoc:{g:['#0F8F8C','#45D6B5','#2FA8E0','#7BE0A0'],t:'0,60,70',b:'10,110,110'},
+  kinhcucquang:{g:['#1C6E86','#3FD9A0','#8A6CF0','#3FA9F5'],t:'10,40,70',b:'25,95,125'},
+  kinhbien:{g:['#1552AE','#2FB0E2','#3D76EC','#47CFE0'],t:'5,30,80',b:'22,78,160'},
+  kinhthan:{g:['#4A505C','#8C96A8','#5E6B85','#A39C90'],t:'20,24,32',b:'60,66,78'}};
+var GL_NEUTRAL=[58,66,72];
+function glV(k,d){var v=parseInt(store(k),10);return isNaN(v)?d:Math.max(0,Math.min(100,v))}
+function glA(){return glV('glA',50)}function glS(){return glV('glS',40)}function glL(){return glV('glL',50)}
+function hexRgb(h){h=h.replace('#','');return [0,2,4].map(function(i){return parseInt(h.substr(i,2),16)})}
+function glMix(hex){var c=hexRgb(hex),s=glS()/100,l=(glL()-50)/50;
+  c=c.map(function(v,i){return v*s+GL_NEUTRAL[i]*(1-s)});
+  c=c.map(function(v){return l>=0?v+(255-v)*l*.38:v*(1+l*.62)});
+  return 'rgb('+c.map(function(v){return Math.round(v)}).join(',')+')'}
+function applyGlass(){var st=document.documentElement.style,names=['--card','--gl-clk','--gl-bar','--gl-bar2','--g0','--g1','--g2','--g3','--wip-bg','--ok-bg','--bo-bg'];
+  var P=GLASS[S.skin];if(!P){names.forEach(function(n){st.removeProperty(n)});return}
+  var f=1.6-1.2*glA()/100,a=function(x){return Math.max(.03,Math.min(.6,x*f)).toFixed(3)},ba=function(x){return Math.max(.2,Math.min(.95,x+(f-1)*.3)).toFixed(3)};
+  st.setProperty('--card','rgba('+P.t+','+a(.22)+')');st.setProperty('--wip-bg','rgba(10,30,90,'+a(.24)+')');st.setProperty('--ok-bg','rgba(0,85,60,'+a(.30)+')');st.setProperty('--bo-bg','rgba(160,100,0,'+a(.32)+')');st.setProperty('--gl-clk','rgba('+P.t+','+a(.22)+')');
+  st.setProperty('--gl-bar','rgba('+P.b+','+ba(.44)+')');st.setProperty('--gl-bar2','rgba('+P.b+','+ba(.64)+')');
+  P.g.forEach(function(h,i){st.setProperty('--g'+i,glMix(h))})}
+function glSlider(){if(!isGlass())return '<p class="note" style="margin:10px 0 0">🔍 Độ trong suốt kính, độ đậm và độ sáng nền: chọn một bộ “Kính” để chỉnh.</p>';
+  function row(id,ic,t,v){return '<label class="glrow" for="'+id+'"><span>'+ic+' '+t+'</span><input type="range" id="'+id+'" min="0" max="100" step="5" value="'+v+'"><b id="'+id+'v">'+v+'%</b></label>'}
+  return row('glA','🔍','Độ trong suốt kính',glA())+row('glS','🌈','Độ đậm màu nền',glS())+row('glL','☀️','Độ sáng tối nền',glL())+
+  '<p class="note" style="margin:4px 0 0">Trong suốt: phải = kính trong hơn. Đậm màu: trái = nền dịu, ngả xám. Sáng tối: trái = nền tối, phải = nền sáng. <button class="btn sm" data-act="glReset" style="margin-left:4px">↺ Mặc định</button></p>'}
 function isGlass(){return /^kinh/.test(S.skin||'')}
 function applyGfx(){var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;document.documentElement.classList.toggle('gfx',isGlass()&&gfxOn()&&!rm);navBlob()}
 function navBlob(){var bl=document.querySelector('.nav-blob'),on=document.querySelector('.nav button.on');if(!bl||!on||!isGlass())return;
@@ -758,7 +809,7 @@ function vHang(c){
   var top=c.rows.slice(0,3),order=[top[1],top[0],top[2]],pos=[2,1,3];
   out+='<section class="podium" aria-label="Top 3">'+order.map(function(r,i){if(!r)return '<div></div>';
     return '<button class="pod p'+pos[i]+' '+stOf(r)+'" data-act="detail" data-id="'+esc(r.id)+'"><span class="medal">'+(['🥇','🥈','🥉'][r.hang-1]||'🏅')+'</span><span class="pn"><i class="st-dot"></i>'+esc(r.ten)+(r.sao?' ⭐':'')+(isStar(r.id,ws)?' 🌟':'')+(bdK[coreName(r.ten)]?' 🎂':'')+'</span><span class="pv">'+mval(r)+'</span><span class="blk">'+r.hang+'</span></button>'}).join('')+'</section>';
-  out+='<div class="lgrow">'+legend()+'<button class="btn sm" data-act="shareImg">📸 Ảnh gửi Zalo</button></div><ol class="list">'+c.rows.map(function(r){
+  out+='<div class="lgrow">'+legend()+'<span class="lgbtns"><button class="btn sm" data-act="race">🎬 Xem lại cuộc đua</button><button class="btn sm" data-act="shareImg">📸 Ảnh gửi Zalo</button></span></div><ol class="list">'+c.rows.map(function(r){
     var den=Math.max(r.targetThuong,r.targetDat)||1,w=Math.min(r.km/den,1)*100,tick=r.targetDat/den*100;
     var big=by==='km'?fmt(r.km)+'<small>km</small>':by==='pct'?pctF(r.pct):by==='tuan'?fmt(r.tuan)+'<small>km / 7 ngày</small>':(by==='ngay'?r.ngay:r.chuoi)+'<small>'+(by==='ngay'?'ngày chạy':'ngày liên tục')+'</small>';
     var small=by==='pct'?fmt(r.km)+' km':pctF(r.pct);
@@ -813,7 +864,7 @@ function vDot(c){
     '<label class="sw-row"><span>🌟 Ngôi sao tuần (từ 12h trưa thứ Hai)</span><input type="checkbox" id="fxStar"'+(starOn()?' checked':'')+'></label>'+
     '<label class="sw-row"><span>🎂 Chúc mừng sinh nhật thành viên</span><input type="checkbox" id="fxBd"'+(bdOn()?' checked':'')+'></label>'+
     '<label class="sw-row"><span>🏃 Thử thách sinh nhật (chạy số km = ngày,tháng sinh)</span><input type="checkbox" id="fxBdCh"'+(bdChOn()?' checked':'')+'></label>'+
-    '<label class="sw-row"><span>↔️ Hiệu ứng chuyển cảnh khi đổi tab</span><input type="checkbox" id="fxTab"'+(tabFxOn()?' checked':'')+'></label>'+
+    '<label class="sw-row"><span>🔍 Hiệu ứng chuyển tab (phóng to từ nút bấm)</span><input type="checkbox" id="fxTab"'+(tabFxOn()?' checked':'')+'></label>'+
     '<label class="sw-row"><span>✨ Chuyển động kính (nền trôi, vệt sáng, thanh tab trượt) · cho 2 bộ Kính</span><input type="checkbox" id="fxGfx"'+(gfxOn()?' checked':'')+'></label>'+
     '<p class="note">Mỗi thành tích chỉ được chúc mừng 1 lần trên mỗi máy, ngôi sao tuần hiện 1 lần mỗi tuần. Bật/tắt chỉ áp dụng cho máy của bạn.</p></section>';
   out+='<section class="panel"><div class="ph"><h2>🗄️ Sao lưu và khôi phục</h2><button class="btn sm" data-act="bkNow">💾 Sao lưu ngay</button></div>'+
@@ -1179,6 +1230,87 @@ function demoCel(){
   if(!S.cel)nextCel();
 }
 
+/* ───────── v1.62 · Xem lại cuộc đua: phát lại tổng km từng ngày của đợt dưới dạng đường đua ───────── */
+var RACE_MS_PER_DAY=850;   // 1 ngày đợt chạy trong bao nhiêu mili-giây ở tốc độ 1×
+var RACE_ROW=30;           // chiều cao mỗi làn đua (px)
+var RC=null;
+function raceBuild(){
+  var c=calc();if(!c||!c.rows.length)return null;
+  var end=minIso(c.today,c.dot.ketThuc),days=[];for(var d=c.dot.batDau;d<=end;d=addDays(d,1))days.push(d);
+  if(!days.length)return null;
+  var ms=c.rows.map(function(r){var m=c.map[r.id]||{},cum=[0],s0=0;days.forEach(function(d){s0=r2(s0+(m[d]||0));cum.push(s0)});
+    return {id:r.id,ten:r.ten,dat:r.targetDat,th:r.targetThuong,cum:cum,f:isFemale(r.ten)}});
+  var maxEnd=Math.max.apply(null,ms.map(function(m){return m.cum[days.length]}).concat([1]));
+  var tg=Math.max.apply(null,ms.map(function(m){return m.dat}).concat([0]));
+  return {c:c,days:days,ms:ms,max:Math.max(maxEnd,1),t:0,speed:1,play:false,raf:0,last:0,k:-1,lead:null,ev:[]};
+}
+function openRace(){
+  var R0=raceBuild();if(!R0)return toast('Đợt chưa có ngày nào để xem lại.');
+  if(RC)cancelAnimationFrame(RC.raf);RC=R0;
+  openModal(head('🎬 Xem lại cuộc đua')+
+    '<div class="rc-top"><div class="rc-day" id="rcDay">Ngày 0<small>'+esc(RC.c.dot.ten)+'</small></div><div class="rc-tot">Cả nhóm<b id="rcTot">0 km</b></div></div>'+
+    '<div class="rc-stage" id="rcStage" style="height:'+(RC.ms.length*RACE_ROW)+'px">'+RC.ms.map(function(m,i){
+      return '<div class="rc-row" id="rc_'+i+'" style="transform:translateY('+(i*RACE_ROW)+'px)"><span class="rc-rk">'+(i+1)+'</span><span class="rc-nm">'+esc(m.ten)+'</span>'+
+        '<span class="rc-bw"><i class="tk"></i><i class="rc-bar"></i><img class="rc-ic" alt=""></span><span class="rc-km">0</span></div>'}).join('')+'</div>'+
+    '<div class="rc-ev" id="rcEv"></div>'+
+    '<div class="rc-ctl"><button class="rc-pp" data-act="racePlay" aria-label="Phát / tạm dừng">▶</button><input type="range" id="rcScrub" min="0" max="'+RC.days.length+'" step="0.01" value="0" aria-label="Kéo đến ngày"><button class="rc-sp" data-act="raceSpeed">1×</button></div>'+
+    '<p class="note" style="margin:8px 0 0">Phát lại tổng km của từng người theo từng ngày trong đợt. Kéo thanh để tua, bấm 1× để đổi tốc độ.</p>','race');
+  raceDraw();setTimeout(function(){if(RC&&S.modal==='race')racePlay(true)},350);
+}
+function raceKm(m,t){var D=RC.days.length;if(t>=D)return m.cum[D];var k=Math.floor(t),f=t-k;return m.cum[k]+(m.cum[k+1]-m.cum[k])*f}
+function raceDraw(){
+  if(!RC||S.modal!=='race')return;
+  var D=RC.days.length,t=Math.min(RC.t,D),k=Math.min(D,Math.floor(t+1e-9));
+  var vals=RC.ms.map(function(m,i){return {i:i,km:raceKm(m,t),m:m}}).sort(function(a,b){return b.km-a.km||a.m.ten.localeCompare(b.m.ten,'vi')});
+  var tot=0;vals.forEach(function(v,rk){tot+=v.km;var el=document.getElementById('rc_'+v.i);if(!el)return;
+    el.style.transform='translateY('+(rk*RACE_ROW)+'px)';el.className='rc-row'+(rk<3?' r'+(rk+1):'');
+    el.querySelector('.rc-rk').textContent=rk+1;
+    var w=Math.max(0,Math.min(100,v.km/RC.max*100)),bar=el.querySelector('.rc-bar'),ic=el.querySelector('.rc-ic');
+    var won=v.m.dat>0&&v.km>=v.m.dat-1e-9,bo=v.m.th>0&&v.km>=v.m.th-1e-9;
+    bar.style.width=w+'%';bar.classList.toggle('won',won);
+    var src=bo?RFA_IMG[v.m.f?'f':'m']:RFA_IMG[v.m.f?'rf':'rm'];if(ic.getAttribute('src')!==src)ic.setAttribute('src',src);
+    ic.classList.toggle('ch',bo);ic.style.left='max(10px,'+w+'%)';
+    el.querySelector('.rc-km').textContent=fmt(Math.round(v.km*10)/10)});
+  var lab=k>=1?k:0,d=RC.days[Math.max(0,Math.min(D-1,Math.ceil(t)-1))];
+  $('#rcDay').innerHTML='Ngày '+(t<=0?0:Math.min(D,Math.ceil(t-1e-9)))+'<span style="font-size:18px;color:var(--ink2)">/'+D+'</span><small>'+(t<=0?esc(RC.c.dot.ten):ddmm(d)+' · '+esc(RC.c.dot.ten))+'</small>';
+  $('#rcTot').textContent=fmt(Math.round(tot*10)/10)+' km';
+  var sc=document.getElementById('rcScrub');if(sc&&document.activeElement!==sc)sc.value=t;
+  if(k!==RC.k){raceEvents(RC.k,k);RC.k=k}
+}
+function raceEvents(from,to){
+  if(to<=from||from<0){RC.lead=null;if(from<0)return;}
+  var box=$('#rcEv');if(!box)return;
+  for(var k=Math.max(1,from+1);k<=to;k++){
+    var ev=[];RC.ms.forEach(function(m){var a=m.cum[k-1],b=m.cum[k];
+      if(m.th>0&&a<m.th&&b>=m.th)ev.push('⭐ <b>'+esc(m.ten)+'</b> vượt Target thưởng');
+      else if(m.dat>0&&a<m.dat&&b>=m.dat)ev.push('🏁 <b>'+esc(m.ten)+'</b> đạt Target')});
+    var top=RC.ms.slice().sort(function(x,y){return y.cum[k]-x.cum[k]})[0];
+    if(top&&top.cum[k]>0&&RC.lead!==top.id){if(RC.lead!==null)ev.push('👑 <b>'+esc(top.ten)+'</b> lên dẫn đầu');RC.lead=top.id}
+    var best=RC.ms.slice().sort(function(x,y){return (y.cum[k]-y.cum[k-1])-(x.cum[k]-x.cum[k-1])})[0],bk=best?r2(best.cum[k]-best.cum[k-1]):0;
+    if(bk>=15)ev.push('🔥 <b>'+esc(best.ten)+'</b> chạy '+fmt(bk)+' km trong ngày');
+    ev.forEach(function(h){RC.ev.unshift('<span style="color:var(--ink2)">'+ddmm(RC.days[k-1])+'</span> · '+h)});
+  }
+  if(to>=RC.days.length&&from<to){var tp=RC.ms.slice().sort(function(x,y){return y.cum[RC.days.length]-x.cum[RC.days.length]}).slice(0,3);
+    RC.ev.unshift('🏆 Về đích: '+tp.map(function(m,i){return ['🥇','🥈','🥉'][i]+' <b>'+esc(m.ten)+'</b>'}).join(' · '))}
+  RC.ev=RC.ev.slice(0,3);box.innerHTML=RC.ev.map(function(h){return '<div>'+h+'</div>'}).join('');
+}
+function raceTick(ts){
+  if(!RC||S.modal!=='race'){if(RC)RC.play=false;return}
+  if(!RC.play)return;
+  var dt=RC.last?ts-RC.last:16;RC.last=ts;RC.t+=dt*RC.speed/RACE_MS_PER_DAY;
+  if(RC.t>=RC.days.length){RC.t=RC.days.length;RC.play=false;raceDraw();racePP();return}
+  raceDraw();RC.raf=requestAnimationFrame(raceTick);
+}
+function racePP(){var b=document.querySelector('.rc-pp');if(b)b.textContent=RC.play?'❚❚':(RC.t>=RC.days.length?'↺':'▶')}
+function racePlay(force){if(!RC)return;
+  if(RC.play&&!force){RC.play=false;cancelAnimationFrame(RC.raf);racePP();return}
+  if(RC.t>=RC.days.length){RC.t=0;RC.k=-1;RC.lead=null;RC.ev=[];var b=$('#rcEv');if(b)b.innerHTML=''}
+  RC.play=true;RC.last=0;racePP();cancelAnimationFrame(RC.raf);RC.raf=requestAnimationFrame(raceTick)}
+function raceSpeed(el){var L=[1,2,4],i=(L.indexOf(RC.speed)+1)%L.length;RC.speed=L[i];el.textContent=L[i]+'×'}
+function raceSeek(v){if(!RC)return;RC.play=false;cancelAnimationFrame(RC.raf);var nv=+v;
+  if(nv<RC.t){RC.k=-1;RC.lead=null;RC.ev=[];var b=$('#rcEv');if(b)b.innerHTML='';RC.t=0;raceDraw()}
+  RC.t=nv;raceDraw();racePP()}
+
 /* ───────── v1.60 · Sinh nhật thành viên ───────── */
 var BD_MIN_KM=5;   // thử thách sinh nhật: tối thiểu bao nhiêu km (ngày,tháng nhỏ hơn thì lấy mức này)
 var BD_SOON=3;     // nhắc "Sắp sinh nhật" trước bao nhiêu ngày
@@ -1346,7 +1478,9 @@ var tT;function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearT
 document.addEventListener('click',function(ev){
   var tb=ev.target.closest('[data-tab]');if(tb){var TABS=['hang','bang','lichsu','dot'],from=TABS.indexOf(S.tab),to=TABS.indexOf(tb.dataset.tab);
     S.tab=tb.dataset.tab;store('tab',S.tab);try{history.replaceState(null,'','#'+S.tab)}catch(e){}render();var sc=$('#scroller');if(sc)sc.scrollTop=0;
-    if(from!==to&&tabFxOn()){var mn=$('#main');mn.classList.remove('tab-r','tab-l');void mn.offsetWidth;mn.classList.add(to>from?'tab-r':'tab-l');setTimeout(function(){mn.classList.remove('tab-r','tab-l')},400)}
+    if(from!==to&&tabFxOn()){var mn=$('#main'),mr=mn.getBoundingClientRect(),br=tb.getBoundingClientRect();
+      mn.style.transformOrigin=Math.round(br.left+br.width/2-mr.left)+'px '+Math.round(br.top+br.height/2-mr.top)+'px';
+      mn.classList.remove('zin');void mn.offsetWidth;mn.classList.add('zin');setTimeout(function(){mn.classList.remove('zin');mn.style.transformOrigin=''},480)}
     return}
   if(ev.target===$('#cel')){nextCel();return}
   if(ev.target===$('#ov')){if(S.modal!=='confirm')closeModal();return}
@@ -1368,6 +1502,10 @@ function handleAct(a,id,el){
     case 'fxDemo':demoCel();break;
     case 'a2hsX':store('a2hs',1);render();break;
     case 'bdCard':openBdCard(id);break;
+    case 'race':openRace();break;
+    case 'racePlay':racePlay();break;
+    case 'raceSpeed':raceSpeed(el);break;
+    case 'glReset':store('glA',null);store('glS',null);store('glL',null);applyGlass();notifyShell();if(S.modal==='skin')$('#glBox').innerHTML=glSlider();else render();break;
     case 'shareImg':openShare();break;
     case 'shMode':SH.mode=el.dataset.v;openShare();break;
     case 'shSend':shareSend();break;
@@ -1406,14 +1544,15 @@ document.addEventListener('change',function(ev){
   if(t.id==='fxStar'){store('fxStar',t.checked?null:'off');toast(t.checked?'🌟 Đã bật ngôi sao tuần':'Đã tắt ngôi sao tuần');return}
   if(t.id==='fxBd'){store('fxBd',t.checked?null:'off');toast(t.checked?'🎂 Đã bật chúc mừng sinh nhật':'Đã tắt chúc mừng sinh nhật');render();return}
   if(t.id==='fxBdCh'){store('fxBdCh',t.checked?null:'off');toast(t.checked?'🏃 Đã bật thử thách sinh nhật':'Đã tắt thử thách sinh nhật');render();return}
-  if(t.id==='fxTab'){store('tabFx',t.checked?null:'off');toast(t.checked?'↔️ Đã bật chuyển cảnh tab':'Đã tắt chuyển cảnh tab');return}
+  if(t.id==='fxTab'){store('tabFx',t.checked?null:'off');toast(t.checked?'🔍 Đã bật hiệu ứng chuyển tab':'Đã tắt hiệu ứng chuyển tab');return}
   if(t.id==='fxGfx'){store('gfx',t.checked?null:'off');applyGfx();toast(t.checked?'✨ Đã bật chuyển động kính':'Đã tắt chuyển động kính');return}
   if(t.id==='dotSel'){S.dotId=t.value;load()}
   else if(t.id==='eMem'){E.memberId=t.value;E.val=E.che==='ghiDe'?kmStr((calc().map[E.memberId]||{})[E.ngay]):'';renderEntry()}
   else if(t.id==='eDate'&&t.value){var c=calc(),max=minIso(c.today,c.dot.ketThuc);if(t.value<c.dot.batDau||t.value>max){showErr('Chọn ngày từ '+ddmm(c.dot.batDau)+' đến '+ddmm(max)+'.');return}E.ngay=t.value;E.val=E.che==='ghiDe'?kmStr((c.map[E.memberId]||{})[E.ngay]):'';renderEntry()}
 });
 document.addEventListener('input',function(ev){if(ev.target.id==='hq'){S.hq=ev.target.value;$('#hlist').innerHTML=hList()}
-  if(ev.target.id==='glA'){store('glA',ev.target.value);var v=document.getElementById('glAv');if(v)v.textContent=ev.target.value+'%';applyGlass()}});
+  if(ev.target.id==='rcScrub'){raceSeek(ev.target.value);return}
+  if(/^gl[ASL]$/.test(ev.target.id)){store(ev.target.id,ev.target.value);var v=document.getElementById(ev.target.id+'v');if(v)v.textContent=ev.target.value+'%';applyGlass();notifyShell()}});
 document.addEventListener('keydown',function(ev){
   if(ev.key==='Enter'&&ev.target&&ev.target.id==='pinIn'){pinOk();return}
   if(ev.key==='Escape'&&S.cel){nextCel();return}
