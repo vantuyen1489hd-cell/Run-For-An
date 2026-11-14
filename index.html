@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<!-- Run For Ăn v1.60 · bản chạy trên GitHub Pages. Dữ liệu vẫn nằm trong Google Sheet (gọi qua API_URL bên dưới). -->
+<!-- Run For Ăn v1.61 · bản chạy trên GitHub Pages. Dữ liệu vẫn nằm trong Google Sheet (gọi qua API_URL bên dưới). -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Bảng xếp hạng chạy bộ của nhóm Run For Ăn">
 <meta name="theme-color" content="#262624">
@@ -360,8 +360,13 @@ h3.sec{font-size:15px;margin:4px 0 8px}
 :root[data-skin^="kinh"] #gbg:after{right:-35vmax;bottom:-10%;background:radial-gradient(closest-side,var(--g3),transparent)}
 :root[data-skin^="kinh"] #scroller{background:transparent}
 /* Tấm kính: nền trong + viền sáng phản chiếu (thẻ không làm mờ hậu cảnh để cuộn mượt; chỉ thanh trên/dưới và khung bật lên mới làm mờ) */
-:root[data-skin^="kinh"] :is(.card,.clock,.starbar,.chip,.icon-btn,.seg,.panel,.gridwrap,.dotsel,.hsearch,.empty,.pod .blk,.skin){box-shadow:var(--gl-hi),var(--gl-sh);border-color:rgba(255,255,255,.16)}
-:root[data-skin^="kinh"] :is(.top:before,.nav,.fab,.sheet,.cel-card){-webkit-backdrop-filter:var(--gl-blur);backdrop-filter:var(--gl-blur)}
+:root[data-skin^="kinh"] :is(.card,.clock,.starbar,.chip,.icon-btn,.seg,.panel,.gridwrap,.dotsel,.hsearch,.empty,.skin){box-shadow:var(--gl-hi),var(--gl-sh);border-color:rgba(255,255,255,.16)}
+/* v1.61 · Bục top 3 trên nền kính: lòng bục pha màu huy chương, viền sáng + quầng sáng như giao diện thường */
+:root[data-skin^="kinh"] .pod .blk{position:relative}
+:root[data-skin^="kinh"] .pod.p1 .blk{background:linear-gradient(180deg,rgba(246,198,91,.34),rgba(246,198,91,.10));box-shadow:inset 0 0 0 2px var(--m1),0 0 18px -1px var(--m1),inset 0 1px 0 rgba(255,255,255,.45)}
+:root[data-skin^="kinh"] .pod.p2 .blk{background:linear-gradient(180deg,rgba(217,225,234,.28),rgba(217,225,234,.07));box-shadow:inset 0 0 0 2px var(--m2),0 0 16px -2px var(--m2),inset 0 1px 0 rgba(255,255,255,.45)}
+:root[data-skin^="kinh"] .pod.p3 .blk{background:linear-gradient(180deg,rgba(231,160,106,.30),rgba(231,160,106,.08));box-shadow:inset 0 0 0 2px var(--m3),0 0 16px -2px var(--m3),inset 0 1px 0 rgba(255,255,255,.45)}
+:root[data-skin^="kinh"] .top:before,:root[data-skin^="kinh"] :is(.nav,.fab,.sheet,.cel-card){-webkit-backdrop-filter:var(--gl-blur);backdrop-filter:var(--gl-blur)}
 :root[data-skin^="kinh"] .card{position:relative;border:0}
 :root[data-skin^="kinh"] .card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(140deg,rgba(255,255,255,.16),rgba(255,255,255,0) 38%,rgba(255,255,255,0) 70%,rgba(255,255,255,.06))}
 :root[data-skin^="kinh"] .card.bonus{box-shadow:var(--gl-hi),inset 0 0 0 1.5px var(--bo-line),0 10px 30px rgba(246,198,91,.18)}
@@ -385,6 +390,16 @@ h3.sec{font-size:15px;margin:4px 0 8px}
 :root[data-skin^="kinh"] .pad button{background:rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
 :root[data-skin^="kinh"] .rule{background:rgba(246,198,91,.16);color:var(--bo-ink);box-shadow:inset 0 0 0 1px rgba(246,198,91,.45)}
 :root[data-skin^="kinh"] .pod.p1 .blk{color:var(--m1)}:root[data-skin^="kinh"] .pod.p2 .blk{color:var(--m2)}:root[data-skin^="kinh"] .pod.p3 .blk{color:var(--m3)}
+/* v1.61 · Chuyển cảnh giữa các tab: nội dung trượt nhẹ theo hướng tab + mờ dần vào */
+#main.tab-r{animation:tabR .32s cubic-bezier(.22,1,.36,1)}#main.tab-l{animation:tabL .32s cubic-bezier(.22,1,.36,1)}
+@keyframes tabR{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes tabL{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#main.tab-r,#main.tab-l{animation:none}}
+/* v1.61 · Độ trong suốt kính: JS đặt --gl-card/--gl-bar… theo thanh trượt trong Cài đặt → Giao diện */
+:root[data-skin^="kinh"] .clock{background:var(--gl-clk,rgba(255,255,255,.10))}
+:root[data-skin^="kinh"] .nav{background:var(--gl-bar,var(--bar))}
+:root[data-skin^="kinh"] .top:before,:root[data-skin^="kinh"] :is(.sheet,.cel-card),:root[data-skin^="kinh"] .fab{background:var(--gl-bar2,var(--bar2))}
+.glrow{display:flex;align-items:center;gap:10px;margin:12px 0 2px;font-size:14px}.glrow input{flex:1;accent-color:var(--accent)}.glrow b{min-width:42px;text-align:right;font-variant-numeric:tabular-nums}
 /* ── Chuyển động (bật/tắt trong Cài đặt → Hiệu ứng) ── */
 html.gfx #gbg:before{animation:gdrift1 26s ease-in-out infinite alternate}
 html.gfx #gbg:after{animation:gdrift2 34s ease-in-out infinite alternate}
@@ -440,7 +455,7 @@ var RFA_IMG={rm:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEMAAABOCAMAAABMi
 
 <script>
 /* ───────── Tiện ích ───────── */
-var APP_VERSION='1.60';
+var APP_VERSION='1.61';
 /* Khi app được nhúng trong trang Run For Ăn (GitHub): báo màu nền để tô vùng tai thỏ / thanh vuốt cho khớp */
 function notifyShell(ready){try{if(window.top===window){var m=document.querySelector('meta[name=theme-color]'),cs0=getComputedStyle(document.documentElement);if(m)m.content=(cs0.getPropertyValue('--g0')||cs0.getPropertyValue('--bg')).trim()||m.content;return}var cs=getComputedStyle(document.documentElement);window.top.postMessage({rfa:1,ready:!!ready,bg:cs.getPropertyValue('--bg').trim(),nav:cs.getPropertyValue('--card').trim()},'*')}catch(e){}}
 var QD_MAC_DINH=['Pace tối thiểu 3:00 – 12:00 phút/km','Chạy bộ, giữ tốc độ ổn định'];  // chỉ dùng cho bản xem thử; bản thật sửa trong Cài đặt → ✏️ Đợt
@@ -631,15 +646,27 @@ var SKINS=[{id:'nguyenban',l:'🖤 Nguyên bản tối',c:['#85B7EB','#2A4517','
   {id:'kinhthan',l:'🖤 Kính Than Chì',c:['#C9D6EA','#3A3F4A','#2B3550','#0E0F12']}];
 S.skin=store('skin')||'nguyenban';if(!SKINS.some(function(k){return k.id===S.skin}))S.skin='nguyenban'; // v1.60: giao diện đã bỏ → về Nguyên bản tối
 var SKIN_NOTE='<p class="note" style="margin:0 0 10px">Chỉ đổi màu trên máy của bạn, không ảnh hưởng người khác. Hai bộ “Kính” có hiệu ứng kính lỏng như iPhone, bật/tắt chuyển động trong mục Hiệu ứng.</p>';
-function setSkin(id){S.skin=id;store('skin',id);document.documentElement.setAttribute('data-skin',id);applyGfx();notifyShell()}
+function setSkin(id){S.skin=id;store('skin',id);document.documentElement.setAttribute('data-skin',id);applyGlass();applyGfx();notifyShell()}
 /* v1.60 · Chuyển động kính: nền loang trôi chậm, vệt sáng trên thẻ thưởng, viên sáng trượt theo tab */
 function gfxOn(){return store('gfx')!=='off'}
+function tabFxOn(){return store('tabFx')!=='off'}
+/* v1.61 · Độ trong suốt kính: 0 = đặc nhất, 100 = trong nhất, mặc định 50 */
+var GL_BAR={kinhngoc:['6,30,36','8,34,40'],kinhthan:['22,23,27','26,27,32']};
+function glA(){var v=parseInt(store('glA'),10);return isNaN(v)?50:Math.max(0,Math.min(100,v))}
+function applyGlass(){var st=document.documentElement.style,names=['--card','--inset','--bg','--wip-bg','--ok-bg','--bo-bg','--gl-clk','--gl-bar','--gl-bar2'];
+  if(!isGlass()){names.forEach(function(n){st.removeProperty(n)});return}
+  var f=1.6-1.2*glA()/100,a=function(x){return Math.max(.02,Math.min(.6,x*f)).toFixed(3)},b=GL_BAR[S.skin]||GL_BAR.kinhngoc,ba=function(x){return Math.max(.38,Math.min(.97,x+(f-1)*.32)).toFixed(3)};
+  st.setProperty('--card','rgba(255,255,255,'+a(.09)+')');st.setProperty('--inset','rgba(255,255,255,'+a(.11)+')');st.setProperty('--bg','rgba(255,255,255,'+a(.05)+')');
+  st.setProperty('--wip-bg','rgba(130,175,255,'+a(.13)+')');st.setProperty('--ok-bg','rgba(70,212,150,'+a(.16)+')');st.setProperty('--bo-bg','rgba(246,198,91,'+a(.18)+')');
+  st.setProperty('--gl-clk','rgba(255,255,255,'+a(.10)+')');st.setProperty('--gl-bar','rgba('+b[0]+','+ba(.66)+')');st.setProperty('--gl-bar2','rgba('+b[1]+','+ba(.86)+')')}
+function glSlider(){return isGlass()?'<label class="glrow" for="glA"><span>🔍 Độ trong suốt kính</span><input type="range" id="glA" min="0" max="100" step="5" value="'+glA()+'"><b id="glAv">'+glA()+'%</b></label><p class="note" style="margin:0">Kéo sang phải: kính trong hơn, thấy nền rõ hơn. Kéo sang trái: kính đặc hơn, chữ nổi hơn.</p>':
+  '<p class="note" style="margin:10px 0 0">🔍 Độ trong suốt kính: chọn Kính Ngọc hoặc Kính Than Chì để chỉnh.</p>'}
 function isGlass(){return /^kinh/.test(S.skin||'')}
 function applyGfx(){var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;document.documentElement.classList.toggle('gfx',isGlass()&&gfxOn()&&!rm);navBlob()}
 function navBlob(){var bl=document.querySelector('.nav-blob'),on=document.querySelector('.nav button.on');if(!bl||!on||!isGlass())return;
   bl.style.left=(on.offsetLeft+4)+'px';bl.style.width=(on.offsetWidth-8)+'px'}
 function skinGrid(){return '<div class="skins">'+SKINS.map(function(k){return '<button class="skin'+(S.skin===k.id?' on':'')+'" data-act="pickSkin" data-v="'+k.id+'"><span class="sw4">'+k.c.map(function(c){return '<i style="background:'+c+'"></i>'}).join('')+'</span>'+k.l+(S.skin===k.id?' ✓':'')+'</button>'}).join('')+'</div>'}
-function openSkin(){openModal(head('🎨 Chọn giao diện')+SKIN_NOTE+skinGrid(),'skin')}
+function openSkin(){openModal(head('🎨 Chọn giao diện')+SKIN_NOTE+skinGrid()+'<div id="glBox">'+glSlider()+'</div>','skin')}
 
 /* ───────── Quyền admin (v1.40): nhập mã 1 lần, máy nhớ đến hết ngày ───────── */
 var GATED={entry:1,cell:1,newMem:1,editMem:1,askDelMem:1,newDot:1,editDot:1,askDelDot:1,bkNow:1,askRestore:1};
@@ -780,12 +807,13 @@ function vDot(c){
       (mem.length?'<ul class="items">'+mem.map(function(m){return '<li><div class="grow"><div class="t1">'+esc(m.ten)+'</div><div class="t2">🎯 '+fmt(m.targetDat)+' km · 🏆 '+fmt(m.targetThuong)+' km</div></div><button class="btn sm" data-act="editMem" data-id="'+esc(m.id)+'">✏️ Sửa</button></li>'}).join('')+'</ul>':'<p class="note">Đợt “'+esc(c.dot.ten)+'” chưa có ai đăng ký.</p>')+'</section>';
   }
   if(S.data.sinhNhat)out+=vBdCal();
-  out+='<section class="panel"><div class="ph"><h2>🎨 Giao diện</h2></div>'+SKIN_NOTE+skinGrid()+'</section>';
+  out+='<section class="panel"><div class="ph"><h2>🎨 Giao diện</h2></div>'+SKIN_NOTE+skinGrid()+glSlider()+'</section>';
   out+='<section class="panel"><div class="ph"><h2>🎆 Hiệu ứng</h2><button class="btn sm" data-act="fxDemo">▶ Xem thử</button></div>'+
     '<label class="sw-row"><span>🎉 Pháo hoa khi có người đạt target / vượt thưởng</span><input type="checkbox" id="fxOn"'+(fxOn()?' checked':'')+'></label>'+
     '<label class="sw-row"><span>🌟 Ngôi sao tuần (từ 12h trưa thứ Hai)</span><input type="checkbox" id="fxStar"'+(starOn()?' checked':'')+'></label>'+
     '<label class="sw-row"><span>🎂 Chúc mừng sinh nhật thành viên</span><input type="checkbox" id="fxBd"'+(bdOn()?' checked':'')+'></label>'+
     '<label class="sw-row"><span>🏃 Thử thách sinh nhật (chạy số km = ngày,tháng sinh)</span><input type="checkbox" id="fxBdCh"'+(bdChOn()?' checked':'')+'></label>'+
+    '<label class="sw-row"><span>↔️ Hiệu ứng chuyển cảnh khi đổi tab</span><input type="checkbox" id="fxTab"'+(tabFxOn()?' checked':'')+'></label>'+
     '<label class="sw-row"><span>✨ Chuyển động kính (nền trôi, vệt sáng, thanh tab trượt) · cho 2 bộ Kính</span><input type="checkbox" id="fxGfx"'+(gfxOn()?' checked':'')+'></label>'+
     '<p class="note">Mỗi thành tích chỉ được chúc mừng 1 lần trên mỗi máy, ngôi sao tuần hiện 1 lần mỗi tuần. Bật/tắt chỉ áp dụng cho máy của bạn.</p></section>';
   out+='<section class="panel"><div class="ph"><h2>🗄️ Sao lưu và khôi phục</h2><button class="btn sm" data-act="bkNow">💾 Sao lưu ngay</button></div>'+
@@ -1316,7 +1344,10 @@ var tT;function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearT
 
 /* ───────── Sự kiện ───────── */
 document.addEventListener('click',function(ev){
-  var tb=ev.target.closest('[data-tab]');if(tb){S.tab=tb.dataset.tab;store('tab',S.tab);try{history.replaceState(null,'','#'+S.tab)}catch(e){}render();var sc=$('#scroller');if(sc)sc.scrollTop=0;return}
+  var tb=ev.target.closest('[data-tab]');if(tb){var TABS=['hang','bang','lichsu','dot'],from=TABS.indexOf(S.tab),to=TABS.indexOf(tb.dataset.tab);
+    S.tab=tb.dataset.tab;store('tab',S.tab);try{history.replaceState(null,'','#'+S.tab)}catch(e){}render();var sc=$('#scroller');if(sc)sc.scrollTop=0;
+    if(from!==to&&tabFxOn()){var mn=$('#main');mn.classList.remove('tab-r','tab-l');void mn.offsetWidth;mn.classList.add(to>from?'tab-r':'tab-l');setTimeout(function(){mn.classList.remove('tab-r','tab-l')},400)}
+    return}
   if(ev.target===$('#cel')){nextCel();return}
   if(ev.target===$('#ov')){if(S.modal!=='confirm')closeModal();return}
   var el=ev.target.closest('[data-act]');if(!el)return;
@@ -1341,7 +1372,7 @@ function handleAct(a,id,el){
     case 'shMode':SH.mode=el.dataset.v;openShare();break;
     case 'shSend':shareSend();break;
     case 'skin':openSkin();break;
-    case 'pickSkin':setSkin(el.dataset.v);if(S.modal==='skin')$('#sheet').innerHTML=head('🎨 Chọn giao diện')+SKIN_NOTE+skinGrid();else render();break;
+    case 'pickSkin':setSkin(el.dataset.v);if(S.modal==='skin')$('#sheet').innerHTML=head('🎨 Chọn giao diện')+SKIN_NOTE+skinGrid()+'<div id="glBox">'+glSlider()+'</div>';else render();break;
     case 'pickMe':setMe(el.dataset.v);closeModal();render();toast(el.dataset.v?'👤 Chào '+el.dataset.v:'Đã bỏ chọn tên');break;
     case 'sort':S.sort=el.dataset.v;store('sort',S.sort);render();break;
     case 'detail':openDetail(id);break;
@@ -1375,12 +1406,14 @@ document.addEventListener('change',function(ev){
   if(t.id==='fxStar'){store('fxStar',t.checked?null:'off');toast(t.checked?'🌟 Đã bật ngôi sao tuần':'Đã tắt ngôi sao tuần');return}
   if(t.id==='fxBd'){store('fxBd',t.checked?null:'off');toast(t.checked?'🎂 Đã bật chúc mừng sinh nhật':'Đã tắt chúc mừng sinh nhật');render();return}
   if(t.id==='fxBdCh'){store('fxBdCh',t.checked?null:'off');toast(t.checked?'🏃 Đã bật thử thách sinh nhật':'Đã tắt thử thách sinh nhật');render();return}
+  if(t.id==='fxTab'){store('tabFx',t.checked?null:'off');toast(t.checked?'↔️ Đã bật chuyển cảnh tab':'Đã tắt chuyển cảnh tab');return}
   if(t.id==='fxGfx'){store('gfx',t.checked?null:'off');applyGfx();toast(t.checked?'✨ Đã bật chuyển động kính':'Đã tắt chuyển động kính');return}
   if(t.id==='dotSel'){S.dotId=t.value;load()}
   else if(t.id==='eMem'){E.memberId=t.value;E.val=E.che==='ghiDe'?kmStr((calc().map[E.memberId]||{})[E.ngay]):'';renderEntry()}
   else if(t.id==='eDate'&&t.value){var c=calc(),max=minIso(c.today,c.dot.ketThuc);if(t.value<c.dot.batDau||t.value>max){showErr('Chọn ngày từ '+ddmm(c.dot.batDau)+' đến '+ddmm(max)+'.');return}E.ngay=t.value;E.val=E.che==='ghiDe'?kmStr((c.map[E.memberId]||{})[E.ngay]):'';renderEntry()}
 });
-document.addEventListener('input',function(ev){if(ev.target.id==='hq'){S.hq=ev.target.value;$('#hlist').innerHTML=hList()}});
+document.addEventListener('input',function(ev){if(ev.target.id==='hq'){S.hq=ev.target.value;$('#hlist').innerHTML=hList()}
+  if(ev.target.id==='glA'){store('glA',ev.target.value);var v=document.getElementById('glAv');if(v)v.textContent=ev.target.value+'%';applyGlass()}});
 document.addEventListener('keydown',function(ev){
   if(ev.key==='Enter'&&ev.target&&ev.target.id==='pinIn'){pinOk();return}
   if(ev.key==='Escape'&&S.cel){nextCel();return}
@@ -1404,6 +1437,6 @@ function appH(){
 function fixH(){document.documentElement.style.setProperty('--appH',appH()+'px')}
 if(STANDALONE)document.documentElement.classList.add('standalone');
 fixH();window.addEventListener('resize',function(){fixH();navBlob()});window.addEventListener('orientationchange',function(){setTimeout(fixH,300)});
-render();applyGfx();load();
+applyGlass();render();applyGfx();load();
 </script>
 </html>
